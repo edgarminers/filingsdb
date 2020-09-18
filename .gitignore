@@ -1,6 +1,4 @@
 .cache/
 tmp/
+bin/
 *.db*
-filingsdb*
-goimports
-gopls

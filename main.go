@@ -356,7 +356,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Printf("Found %v", links)
+	// log.Printf("Found %v", links)
 	for _, url := range links {
 		ProcessURL(db, url)
 	}
