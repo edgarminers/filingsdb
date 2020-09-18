@@ -1,0 +1,6 @@
+.cache/
+tmp/
+*.db*
+filingsdb*
+goimports
+gopls
