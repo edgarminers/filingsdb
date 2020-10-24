@@ -1,9 +1,5 @@
 package models
 
-import (
-	"gorm.io/gorm"
-)
-
 // DataCAL is a Calculations
 func ParseDataCAL(tokens []string) DataCAL {
 	cal := DataCAL{}
@@ -20,25 +16,24 @@ func ParseDataCAL(tokens []string) DataCAL {
 }
 
 type DataCAL struct {
-	gorm.Model
 
 	/**
 	Accession Number. The 20-character string
 	formed from the 18-digit number assigned by
 	the Commission to each EDGAR submission.
 	*/
-	Adsh string `gorm:"index:idx_cal"`
+	Adsh string `gorm:"index:idx_cals_adsh"`
 
 	/**
 	Sequential number for grouping arcs in a submission.
 	*/
-	Grp int `gorm:"index:idx_cal"`
+	Grp int
 
 	/**
 	Sequential number for arcs within a
 	group in a submission.
 	*/
-	Arc int `gorm:"index:idx_cal"`
+	Arc int
 
 	/**
 	Indicates a weight of -1

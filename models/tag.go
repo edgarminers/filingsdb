@@ -1,9 +1,5 @@
 package models
 
-import (
-	"gorm.io/gorm"
-)
-
 // DataTAG is a Tag
 func ParseDataTAG(tokens []string) DataTAG {
 	tag := DataTAG{}
@@ -20,19 +16,18 @@ func ParseDataTAG(tokens []string) DataTAG {
 }
 
 type DataTAG struct {
-	gorm.Model
 	/**
 	The unique identifier (name) for a tag
 	in a specific taxonomy release.
 	*/
-	Tag string `gorm:"index:idx_tag"`
+	Tag string `gorm:"index:idx_tags_tag"`
 
 	/**
 	For a standard tag, an identifier for the
 	taxonomy; otherwise the accession number
 	where the tag was defined.
 	*/
-	Version string `gorm:"index:idx_tag"`
+	Version string //`gorm:"index:idx_tag"`
 
 	/**
 	1 if tag is custom (version=adsh), 0 if it is

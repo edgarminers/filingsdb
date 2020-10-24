@@ -1,7 +1,5 @@
 package models
 
-import "gorm.io/gorm"
-
 // DataTAG is a Tag
 func ParseDataDIM(tokens []string) DataDIM {
 	dim := DataDIM{}
@@ -12,14 +10,13 @@ func ParseDataDIM(tokens []string) DataDIM {
 }
 
 type DataDIM struct {
-	gorm.Model
 
 	/**
 	MD5 hash of the segments field text.
 	Although MD5 is unsuitable for cryptographic use,
 	it is used here merely to limit the size of the primary key.
 	*/
-	Dimh string `gorm:"index:idx_dim"`
+	Dimh string `gorm:"index:idx_dims_dimh"`
 
 	/**
 	Concatenation of tag names representing the

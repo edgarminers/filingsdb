@@ -2,7 +2,6 @@ package models
 
 import (
 	"github.com/shopspring/decimal"
-	"gorm.io/gorm"
 )
 
 // DataTAG is a Tag
@@ -32,20 +31,19 @@ func ParseDataTXT(tokens []string) DataTXT {
 }
 
 type DataTXT struct {
-	gorm.Model
 
 	/**
 	Accession Number. The 20-character string
 	formed from the 18-digit number assigned by
 	the Commission to each EDGAR submission.
 	*/
-	Adsh string `gorm:"index:idx_txt"`
+	Adsh string `gorm:"index:idx_txts_adsh"`
 
 	/**
 	The unique identifier (name) for a tag in a
 	 specific taxonomy release.
 	*/
-	Tag string `gorm:"index:idx_txt"`
+	Tag string `gorm:"index:idx_txts_tag"`
 
 	/**
 	For a standard tag, an identifier for the
@@ -54,13 +52,13 @@ type DataTXT struct {
 	"invest/2013" indicates that the tag is
 	defined in the 2013 INVEST taxonomy.
 	*/
-	Version string `gorm:"index:idx_txt"`
+	Version string //`gorm:"index:idx_txt"`
 
 	/**
 	The end date for the data value,
 	rounded to the nearest month end.
 	*/
-	Ddate string `gorm:"index:idx_txt"`
+	Ddate string //`gorm:"index:idx_txt"`
 
 	/**
 	The count of the number of quarters
@@ -68,7 +66,7 @@ type DataTXT struct {
 	rounded to the nearest whole number.
 	A point in time value is represented by 0.
 	*/
-	Qtrs int `gorm:"index:idx_txt"`
+	Qtrs int //`gorm:"index:idx_txt"`
 
 	/**
 	A positive integer to distinguish different
@@ -80,7 +78,7 @@ type DataTXT struct {
 	closeness of the duration to a multiple of
 	three months. See fields dcml, durp and datp below.
 	*/
-	Iprx int `gorm:"index:idx_txt"`
+	Iprx int //`gorm:"index:idx_txt"`
 
 	/**
 	The ISO language code of the fact content.
@@ -118,7 +116,7 @@ type DataTXT struct {
 	The 32-byte hexadecimal key for the
 	dimensional information in the DIM data set.
 	*/
-	Dimh string `gorm:"index:idx_txt"`
+	Dimh string `gorm:"index:idx_txts_dimh"`
 
 	/**
 	Small integer representing the number of dimensions,

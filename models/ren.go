@@ -1,9 +1,5 @@
 package models
 
-import (
-	"gorm.io/gorm"
-)
-
 // DataPRE is a Presentation
 func ParseDataREN(tokens []string) DataREN {
 	ren := DataREN{}
@@ -21,14 +17,13 @@ func ParseDataREN(tokens []string) DataREN {
 }
 
 type DataREN struct {
-	gorm.Model
 
 	/**
 	Accession Number. The 20-character string
 	formed from the 18-digit number assigned by
 	the Commission to each EDGAR submission.
 	*/
-	Adsh string `gorm:"index:idx_ren"`
+	Adsh string `gorm:"index:idx_rens_adsh"`
 
 	/**
 	Represents the report grouping. The numeric
@@ -36,7 +31,7 @@ type DataREN struct {
 	the renderer and posted on the EDGAR website.
 	Note that in some situations the numbers skip.
 	*/
-	Report string `gorm:"index:idx_ren"`
+	Report string //`gorm:"index:idx_ren"`
 
 	/**
 	The type of interactive data file rendered

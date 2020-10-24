@@ -2,7 +2,6 @@ package models
 
 import (
 	"github.com/shopspring/decimal"
-	"gorm.io/gorm"
 )
 
 // DataNUM is a Number
@@ -21,40 +20,39 @@ func ParseDataNUM(tokens []string) DataNUM {
 	num.Footlen = parseInt(tokens[10])
 	num.Dimn = parseInt(tokens[11])
 	num.Coreg = strOrNil(tokens[12])
-	num.Durp = *parseDecimal(tokens[13])
-	num.Datp = *parseDecimal(tokens[14])
+	num.Durp = parseDecimal(tokens[13])
+	num.Datp = parseDecimal(tokens[14])
 	num.Dcml = parseInt(tokens[15])
 	return num
 }
 
 type DataNUM struct {
-	gorm.Model
 
 	/**
 	Accession Number. The 20-character string
 	formed from the 18-digit number assigned
 	by the Commission to each EDGAR submission.
 	*/
-	Adsh string `gorm:"index:idx_num"`
+	Adsh string `gorm:"index:idx_nums_adsh"`
 
 	/**
 	The unique identifier (name) for a
 	tag in a specific taxonomy release.
 	*/
-	Tag string `gorm:"index:idx_num"`
+	Tag string `gorm:"index:idx_nums_tag"`
 
 	/**
 	For a standard tag, an identifier for the
 	taxonomy; otherwise the accession number
 	where the tag was defined.
 	*/
-	Version string `gorm:"index:idx_num"`
+	Version string //`gorm:"index:idx_num"`
 
 	/**
 	The end date for the data value, rounded
 	to the nearest month end.
 	*/
-	Ddate string `gorm:"index:idx_num"`
+	Ddate string //`gorm:"index:idx_num"`
 
 	/**
 	The count of the number of quarters
@@ -62,18 +60,18 @@ type DataNUM struct {
 	the nearest whole number. "0" indicates it
 	is a point-in-time value.
 	*/
-	Qtrs int `gorm:"index:idx_num"`
+	Qtrs int //`gorm:"index:idx_num"`
 
 	/**
 	The unit of measure for the value.
 	*/
-	Uom string `gorm:"index:idx_num"`
+	Uom string //`gorm:"index:idx_num"`
 
 	/**
 	The 32-byte hexadecimal key for the
 	dimensional information in the DIM data set.
 	*/
-	Dimh string `gorm:"index:idx_num"`
+	Dimh string `gorm:"index:idx_nums_dimh"`
 
 	/**
 	A positive integer to distinguish different
@@ -85,7 +83,7 @@ type DataNUM struct {
 	loseness of the duration to a multiple of three months.
 	See fields dcml, durp and datp below.
 	*/
-	Iprx int `gorm:"index:idx_num"`
+	Iprx int //`gorm:"index:idx_num"`
 
 	/**
 	The value. This is not scaled, it is as found
@@ -128,7 +126,7 @@ type DataNUM struct {
 	120 days rounded to a 91-day quarter has a durp
 	value of 29/91 = +0.3187.
 	*/
-	Durp decimal.Decimal `sql:"type:decimal(20,8);"`
+	Durp *decimal.Decimal `sql:"type:decimal(20,8);"`
 
 	/**
 	The difference between the reported fact date and
@@ -137,7 +135,7 @@ type DataNUM struct {
 	with ddate rounded to 31/Dec, has a datp value of
 	minus 2/31 = -0.0645.
 	*/
-	Datp decimal.Decimal `sql:"type:decimal(20,8);"`
+	Datp *decimal.Decimal `sql:"type:decimal(20,8);"`
 
 	/**
 	The value of the fact "decimals" attribute,

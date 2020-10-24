@@ -1,9 +1,5 @@
 package models
 
-import (
-	"gorm.io/gorm"
-)
-
 // DataPRE is a Presentation
 func ParseDataPRE(tokens []string) DataPRE {
 	pre := DataPRE{}
@@ -21,14 +17,13 @@ func ParseDataPRE(tokens []string) DataPRE {
 }
 
 type DataPRE struct {
-	gorm.Model
 
 	/**
 	Accession Number. The 20-character string
 	formed from the 18-digit number assigned by
 	the Commission to each EDGAR submission.
 	*/
-	Adsh string `gorm:"index:idx_pre"`
+	Adsh string `gorm:"index:idx_pres_adsh"`
 
 	/**
 	Represents the report grouping. The numeric
@@ -36,7 +31,7 @@ type DataPRE struct {
 	the renderer and posted on the EDGAR website.
 	Note that in some situations the numbers skip.
 	*/
-	Report int `gorm:"index:idx_pre"`
+	Report int //`gorm:"index:idx_pre"`
 
 	/**
 	Represents the tag's presentation line order
@@ -44,7 +39,7 @@ type DataPRE struct {
 	and report field, presentation location,
 	order and grouping can be derived.
 	*/
-	Line int `gorm:"index:idx_pre"`
+	Line int //`gorm:"index:idx_pre"`
 
 	/**
 	The financial statement location to which the value of the "report" field pertains.

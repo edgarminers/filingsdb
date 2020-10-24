@@ -1,15 +1,16 @@
 package models
 
 import (
+	"strings"
+
 	"github.com/shopspring/decimal"
-	"gorm.io/gorm"
 )
 
 // DataSUB is a Submission
 func ParseDataSUB(tokens []string) DataSUB {
 	sub := DataSUB{}
 	sub.Adsh = tokens[0]
-	sub.Cik = tokens[1]
+	sub.Cik = strings.TrimLeft(tokens[1], "0")
 	sub.Name = tokens[2]
 	sub.Sic = tokens[3]
 	sub.Countryba = tokens[4]
@@ -52,21 +53,20 @@ func ParseDataSUB(tokens []string) DataSUB {
 }
 
 type DataSUB struct {
-	gorm.Model
 	/**
 	Accession Number.
 	The 20  -character string formed from the
 	18-digit number assigned by the Commission
 	to each EDGAR submission
 	*/
-	Adsh string `gorm:"index:idx_sub"`
+	Adsh string `gorm:"index:idx_subs_adsh"`
 
 	/**
 	Central Index Key (CIK).
 	Ten digit number assigned by the Commission to
 	each registrant that submits filings.
 	*/
-	Cik string
+	Cik string `gorm:"index:idx_subs_cik"`
 
 	/**
 	Name of registrant.
@@ -82,7 +82,7 @@ type DataSUB struct {
 	as of the filing date, indicating the registrant's
 	type of business.
 	*/
-	Sic string
+	Sic string `gorm:"index:idx_subs_sic"`
 
 	/**
 	The ISO 3166-1 country of the registrant's
